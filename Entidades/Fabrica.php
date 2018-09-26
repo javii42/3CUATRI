@@ -1,0 +1,101 @@
+<?php
+if(file_exists("../Entidades/Empleado.php")) include_once "../Entidades/Empleado.php";
+if(file_exists("./Entidades/Empleado.php")) include_once "./Entidades/Empleado.php";
+
+if(file_exists("../Entidades/interfaces.php")) include_once "../Entidades/interfaces.php";
+if(file_exists("./Entidades/interfaces.php")) include_once "./Entidades/interfaces.php";
+
+class Fabrica implements IArchivo{
+    private $_cantidadMaxima;
+    private $_empleados;
+    private $_razonSocial;
+
+    public function __construct($razonSocial){
+        $this->_cantidadMaxima = 5;
+      //  $this->_empleados[];
+        $this->_razonSocial = $razonSocial;
+    }
+    
+    public function SetCantidadMaxima($cant){
+        if($cant > 0 ){
+            $this->_cantidadMaxima = $cant;
+        }
+    }
+    public function AgregarEmpleado($emp){
+        $retorno = false;
+        if(is_a($emp,'Empleado') && $this->_cantidadMaxima >= count($this->_empleados)){
+            $this->_empleados[] = $emp;
+            $retorno = true;
+        }
+        $this->_empleados = $this->EliminarEmpleadoRepetido();
+        return $retorno;
+    }
+
+    public function CalcularSueldos(){
+        $sueldos = 0;
+        foreach($this->_empleados as $empleado){
+            $sueldos += $empleado->GetSueldo();
+        }
+        return $sueldos;
+    }
+
+    public function EliminarEmpleado($emp){
+        $retorno = false;
+        for($i = 0; $i <= count($this->_empleados); $i++){
+            if(is_a($this->_empleados[$i],'Empleado') && !is_null($this->_empleados[$i])){
+                if($emp->GetDni() == $this->_empleados[$i]->GetDni()){
+                    unset($this->_empleados[$i]);
+                    $retorno = true;
+                }
+            }
+        }
+        return $retorno;
+    }
+
+    private function EliminarEmpleadoRepetido(){
+        return array_unique($this->_empleados, SORT_REGULAR);
+    }
+    
+    public function ToString(){
+        $retorno = "";
+        foreach($this->_empleados as $empleado){
+           if(is_a($empleado,'Empleado')) $retorno =$retorno. $empleado->ToString()."<br/>";
+        }
+        return $retorno;
+    }
+
+    public function GuardarEnArchivo($nombreDeArchivo){
+        if(file_exists("./Archivos/".$nombreDeArchivo)){
+            $archivo = fopen("./Archivos/".$nombreDeArchivo,"w");
+        }
+        if(file_exists("../Archivos/".$nombreDeArchivo)){
+            $archivo = fopen("./Archivos/".$nombreDeArchivo,"w");
+        }
+        foreach($this->_empleados as $empleado){
+           if(is_a($empleado,'Empleado'))  $escribio = fwrite($archivo,$empleado->ToString()."\r\n");
+        }       
+        fclose($archivo); 
+    }
+
+    public function TraerDeArchivo($nombreDeArchivo){
+            if(file_exists("./Archivos/".$nombreDeArchivo)){
+                $archivo = fopen("./Archivos/".$nombreDeArchivo,"rb");
+            }
+            if(file_exists("../Archivos/".$nombreDeArchivo)){
+                $archivo = fopen("../Archivos/".$nombreDeArchivo,"rb");
+            }
+           // echo "../Archivos/".$nombreDeArchivo;
+            if($archivo != null){
+                while(!feof($archivo) && $archivo != null){
+                    $linea = fgets($archivo);
+                    $arrayLinea = explode("-",$linea);
+                    if($arrayLinea[0]!=""){
+                        $empleado = new Empleado($arrayLinea[0],$arrayLinea[1],
+                            $arrayLinea[2],$arrayLinea[3],$arrayLinea[4],$arrayLinea[5],$arrayLinea[6]);
+                        $this->AgregarEmpleado($empleado);
+                    }
+                }
+                fclose($archivo);
+            }
+    }
+}

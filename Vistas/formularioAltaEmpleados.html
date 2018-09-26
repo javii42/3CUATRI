@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../tsc/Funciones.js"></script>
+    <title>Formulario Alta Empleado</title>
+</head>
+<body>
+
+    <form id="frmAlta">
+    <table align ="center">
+            <tr align ="left">
+                    <h2>Alta Empleado</h2>
+             </tr>
+            <tr>
+            <th>
+                <h4>Datos Personales</h4>
+                <hr width=250%>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <label>DNI</label>
+                </td>
+                <td>
+                    <input type="number" name="txtDni" id="txtDni" min=1000000 max=55000000>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Apellido</label>
+                </td>
+                <td>
+                    <input type="text" name="txtApellido" id="txtApellido">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Nombre</label>
+                </td>
+                <td>
+                    <input type="text" name="txtNombre" id="txtNombre">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Sexo</label>
+                </td>
+                <td>
+                    <select name="CbSexo" id="CbSexo">
+                        <option value="s">Seleccione</option>
+                        <option value="h">Hombre</option>
+                        <option value="m">Mujer</option>
+                        <option value="t">No define</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                    <th>
+                        <h4>Datos Laborales</h4>
+                        <hr width=250%>
+                    </th>
+                </tr>
+            <tr>
+                <td>
+                    <label>Legajo</label>
+                </td>
+                <td>
+                    <input type="number" name="txtLegajo" id="txtLegajo" min=100 max=550>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Sueldo</label>
+                </td>
+                <td>
+                        <input type="number" name="txtSueldo" id="txtSueldo" min = 8000 max = 25000 step=500>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Turno</label>
+                </td>
+                <td>
+                    <input type="radio" name="rbTurno" id="rbTurno" value="M" checked> Mañana<br>
+                    <input type="radio" name="rbTurno" id="rbTurno"  value="T"> Tarde<br>
+                    <input type="radio" name="rbTurno" id="rbTurno"  value="N"> Noche
+                </td>
+            </tr>
+            <tr align = "right">
+                <td></td>
+                <td>
+                    <input type="reset" value="Limpiar">
+                </td>
+            </tr>
+            <tr align = "right">
+                <td></td>
+            <td>
+                <input type="button" value="Enviar" onclick="AdministrarValidaciones()">
+                </td>
+            </tr>
+    </table>
+</form>
+<a id="volver" hidden>Volver</a>
+</body>
+</html>

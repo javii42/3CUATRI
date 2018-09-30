@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../tsc/Funciones.js"></script>
+    <title>HTML5 - Fomulario Login</title>
+</head>
+<body>
+    <form id="frmLogin">
+        <table align="center">
+            <tr align = "left">
+                <th>                    
+                    <h2>Login</h2>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <h4>Ingreso de credenciales</h4>
+                    <hr width=250%>
+                </th>
+            </tr>
+            <tr>
+                    <td><label>DNI</label></td>
+                    <td><input type="number" name="txtDni" id="txtDni" min=1000000 max=55000000></td>
+            </tr>
+            <tr>
+                <td><label>Apellido</label></td>
+                <td>
+                    <input type="text" name="txtApellido" id ="txtApellido">         
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <hr width=250%>    
+                </th>
+            </tr>
+            <tr align="right">
+                <td></td>
+                <td>
+                    <input type="button" name="btnEnviar" id ="btnEnviar" value="Enviar" onclick="AdministrarValidacionesLogin()">
+                </td>
+            </tr>
+            <tr align="right">
+                <td></td>
+                <td>
+                    <input type="reset" name="limpiar" id ="limpiar" value="limpiar">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

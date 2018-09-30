@@ -1,4 +1,3 @@
-"use strict";
 function AdministrarValidaciones() {
     console.log("Formulario Enviado");
     var xhttp = new XMLHttpRequest();
@@ -18,11 +17,11 @@ function AdministrarValidaciones() {
         var camposIn = formulario.getElementsByTagName("input");
         console.log("Cantidad de inputs: " + camposIn.length);
         for (var i = 0; i < camposIn.length; i++) {
-            camposIn[i].style.borderColor = "white";
+            AdministrarSpanError(camposIn[i].id, false);
             console.log("input: " + camposIn[i].id + "-" + camposIn[i].value);
             if (!ValidarCamposVacios(camposIn[i].value)) {
                 console.log("Campo " + camposIn[i].name + " vacio");
-                camposIn[i].style.borderColor = "red";
+                AdministrarSpanError(camposIn[i].id, true);
                 camposVacios = true;
             }
             switch (camposIn[i].name) {
@@ -32,14 +31,23 @@ function AdministrarValidaciones() {
                 case "txtApellido":
                     apellido = (camposIn[i].value);
                     break;
-                case "rbTurno":
-                    turno = (camposIn[i].value);
+                case "rbTurnoM":
+                    if (camposIn[i].checked)
+                        turno = (camposIn[i].value);
+                    break;
+                case "rbTurnoT":
+                    if (camposIn[i].checked)
+                        turno = (camposIn[i].value);
+                    break;
+                case "rbTurnoN":
+                    if (camposIn[i].checked)
+                        turno = (camposIn[i].value);
                     break;
                 case "txtDni":
                     dni = Number(camposIn[i].value);
                     if (!ValidarRangoNumerico(Number(camposIn[i].value), 1000000, 55000000)) {
                         console.log("Rango DNI invalido");
-                        camposIn[i].style.borderColor = "red";
+                        AdministrarSpanError(camposIn[i].id, true);
                         camposFueraDeRango = true;
                     }
                     break;
@@ -47,7 +55,7 @@ function AdministrarValidaciones() {
                     legajo = Number(camposIn[i].value);
                     if (!ValidarRangoNumerico(Number(camposIn[i].value), 100, 550)) {
                         console.log("Rango Legajo invalido");
-                        camposIn[i].style.borderColor = "red";
+                        AdministrarSpanError(camposIn[i].id, true);
                         camposFueraDeRango = true;
                     }
                     break;
@@ -55,7 +63,7 @@ function AdministrarValidaciones() {
                     sueldo = Number(camposIn[i].value);
                     if (!ValidarRangoNumerico(Number(camposIn[i].value), 8000, ObtenerSueldoMaximo(ObtenerTurnoSeleccionado()))) {
                         console.log("Rango Sueldo invalido");
-                        camposIn[i].style.borderColor = "red";
+                        AdministrarSpanError(camposIn[i].id, true);
                         camposFueraDeRango = true;
                     }
                     break;
@@ -69,7 +77,7 @@ function AdministrarValidaciones() {
         console.log("input: " + combo.id + "-" + combo.value);
         if (!ValidarCombo(combo.value, "s")) {
             console.log("Combo de sexo no seleccionado");
-            combo.style.borderColor = "red";
+            AdministrarSpanError(camposIn[i].id, true);
             comboNoSeleccionado = true;
         }
         if (comboNoSeleccionado || camposVacios || camposFueraDeRango) {
@@ -145,4 +153,56 @@ function ObtenerSueldoMaximo(val) {
         retorno = 24000;
     }
     return retorno;
+}
+function AdministrarSpanError(id, error) {
+    var elemento = document.getElementById(id);
+    if (error) {
+        if (elemento != null)
+            elemento.style.borderColor = "red";
+    }
+    else {
+        if (elemento != null)
+            elemento.style.borderColor = "white";
+    }
+}
+function VerificarValidacionesLogin() {
+    var retorno = false;
+    return retorno;
+}
+function AdministrarValidacionesLogin() {
+    var dni = 0;
+    var apellido = "";
+    var camposVacios = false;
+    var camposFueraDeRango = false;
+    var formulario = document.getElementById("frmLogin");
+    console.log("form: " + formulario);
+    if (formulario != null) {
+        var camposIn = formulario.getElementsByTagName("input");
+        console.log("Cantidad de inputs: " + camposIn.length);
+        for (var i = 0; i < camposIn.length; i++) {
+            AdministrarSpanError(camposIn[i].id, false);
+            console.log("input: " + camposIn[i].id + "-" + camposIn[i].value);
+            if (!ValidarCamposVacios(camposIn[i].value)) {
+                console.log("Campo " + camposIn[i].name + " vacio");
+                AdministrarSpanError(camposIn[i].id, true);
+                camposVacios = true;
+            }
+            switch (camposIn[i].name) {
+                case "txtDni":
+                    dni = Number(camposIn[i].value);
+                    if (!ValidarRangoNumerico(Number(camposIn[i].value), 1000000, 55000000)) {
+                        console.log("Rango DNI invalido");
+                        AdministrarSpanError(camposIn[i].id, true);
+                        camposFueraDeRango = true;
+                    }
+                    break;
+                case "txtApellido":
+                    apellido = (camposIn[i].value);
+                    break;
+            }
+        }
+        if (camposVacios || camposFueraDeRango) {
+            alert("Errores de carga");
+        }
+    }
 }

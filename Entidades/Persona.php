@@ -31,7 +31,7 @@ abstract class Persona{
     public abstract function Hablar($idiomas);
 
     public function ToString(){
-        return $this->GetApellido()."-".$this->GetNombre()."-".$this->GetDni()."-".$this->GetSexo();
+        return $this->GetNombre()."-".$this->GetApellido()."-".$this->GetDni()."-".$this->GetSexo();
     }
 
 }

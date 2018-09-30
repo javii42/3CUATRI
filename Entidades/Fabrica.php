@@ -43,7 +43,7 @@ class Fabrica implements IArchivo{
         $retorno = false;
         for($i = 0; $i <= count($this->_empleados); $i++){
             if(is_a($this->_empleados[$i],'Empleado') && !is_null($this->_empleados[$i])){
-                if($emp->GetDni() == $this->_empleados[$i]->GetDni()){
+                if($emp->GetLegajo() == $this->_empleados[$i]->GetLegajo()){
                     unset($this->_empleados[$i]);
                     $retorno = true;
                 }
@@ -66,10 +66,16 @@ class Fabrica implements IArchivo{
 
     public function GuardarEnArchivo($nombreDeArchivo){
         if(file_exists("./Archivos/".$nombreDeArchivo)){
-            $archivo = fopen("./Archivos/".$nombreDeArchivo,"w");
+            unlink("./Archivos/".$nombreDeArchivo);
+            $archivo = fopen("./Archivos/".$nombreDeArchivo,"a+");
+        }elseif(file_exists("./Archivos/")){
+            $archivo = fopen("./Archivos/".$nombreDeArchivo,"a+");
         }
         if(file_exists("../Archivos/".$nombreDeArchivo)){
-            $archivo = fopen("./Archivos/".$nombreDeArchivo,"w");
+            unlink("../Archivos/".$nombreDeArchivo);
+            $archivo = fopen("../Archivos/".$nombreDeArchivo,"a+");
+        }elseif(file_exists("../Archivos/")){            
+            $archivo = fopen("../Archivos/".$nombreDeArchivo,"a+");
         }
         foreach($this->_empleados as $empleado){
            if(is_a($empleado,'Empleado'))  $escribio = fwrite($archivo,$empleado->ToString()."\r\n");
@@ -89,7 +95,10 @@ class Fabrica implements IArchivo{
                 while(!feof($archivo) && $archivo != null){
                     $linea = fgets($archivo);
                     $arrayLinea = explode("-",$linea);
-                    if($arrayLinea[0]!=""){
+                    if(isset($arrayLinea[1])){
+                     /*   echo $arrayLinea[0] . "-". $arrayLinea[1] . "-". 
+                        $arrayLinea[2] . "-". $arrayLinea[3] . "-". 
+                        $arrayLinea[4] . "-". $arrayLinea[5] . "-". $arrayLinea[6];*/
                         $empleado = new Empleado($arrayLinea[0],$arrayLinea[1],
                             $arrayLinea[2],$arrayLinea[3],$arrayLinea[4],$arrayLinea[5],$arrayLinea[6]);
                         $this->AgregarEmpleado($empleado);

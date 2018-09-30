@@ -22,11 +22,11 @@ function AdministrarValidaciones(){
         let camposIn = formulario.getElementsByTagName("input");
         console.log("Cantidad de inputs: " + camposIn.length);
         for(var i = 0; i<camposIn.length;i++){
-            camposIn[i].style.borderColor = "white";
+            AdministrarSpanError(camposIn[i].id,false);
             console.log("input: " + camposIn[i].id + "-" + camposIn[i].value );
            if(!ValidarCamposVacios(camposIn[i].value)){
                console.log("Campo " + camposIn[i].name + " vacio");
-               camposIn[i].style.borderColor = "red";
+               AdministrarSpanError(camposIn[i].id,true);
                camposVacios = true;
            }
            switch(camposIn[i].name){
@@ -36,14 +36,20 @@ function AdministrarValidaciones(){
                 case "txtApellido":
                     apellido = (camposIn[i].value);
                     break;
-                case "rbTurno":
-                    turno = (camposIn[i].value);
+                case "rbTurnoM":
+                    if(camposIn[i].checked) turno = (camposIn[i].value);
+                    break;
+                case "rbTurnoT":
+                    if(camposIn[i].checked) turno = (camposIn[i].value);
+                    break;
+                case "rbTurnoN":
+                    if(camposIn[i].checked)turno = (camposIn[i].value);
                     break;
                case "txtDni":
                     dni = Number(camposIn[i].value);
                     if(!ValidarRangoNumerico(Number(camposIn[i].value),1000000,55000000)){
                         console.log("Rango DNI invalido");
-                        camposIn[i].style.borderColor = "red";
+                        AdministrarSpanError(camposIn[i].id,true);
                         camposFueraDeRango = true;
                     }
                     break;
@@ -51,7 +57,7 @@ function AdministrarValidaciones(){
                     legajo = Number(camposIn[i].value);
                     if(!ValidarRangoNumerico(Number(camposIn[i].value),100,550)){
                         console.log("Rango Legajo invalido");
-                        camposIn[i].style.borderColor = "red";
+                        AdministrarSpanError(camposIn[i].id,true);
                         camposFueraDeRango = true;
                     }
                     break;
@@ -59,7 +65,7 @@ function AdministrarValidaciones(){
                     sueldo = Number(camposIn[i].value);
                    if(!ValidarRangoNumerico(Number(camposIn[i].value),8000,ObtenerSueldoMaximo(ObtenerTurnoSeleccionado()))){
                             console.log("Rango Sueldo invalido");
-                            camposIn[i].style.borderColor = "red";
+                            AdministrarSpanError(camposIn[i].id,true);
                             camposFueraDeRango = true;
                         }                
                     break;
@@ -74,7 +80,7 @@ function AdministrarValidaciones(){
         console.log("input: " + combo.id + "-" + combo.value );
         if(!ValidarCombo(combo.value,"s")){
             console.log("Combo de sexo no seleccionado");
-            combo.style.borderColor = "red";
+            AdministrarSpanError(camposIn[i].id,true);
             comboNoSeleccionado = true;
         }
 
@@ -116,44 +122,3 @@ function AdministrarValidaciones(){
 }
 }
 
-function ValidarCamposVacios(valor:string):boolean{
-    let retorno:boolean = false;
-    if(valor.length != 0){
-        retorno = true;
-    }
-    return retorno;
-}
-
-function ValidarRangoNumerico(num:number,min:number,max:number):boolean{
-    let retorno:boolean = true;
-    if(num > max || num < min){
-        retorno = false;
-    }
-    return retorno;
-}
-
-function ValidarCombo(val1:string,val2:string):boolean{
-    let retorno:boolean = true;
-    if(val1 == val2){
-        retorno = false;
-    }
-    return retorno;
-}
-
-function ObtenerTurnoSeleccionado():string{
-    let retorno:string = "";
-    retorno = (<HTMLInputElement>document.getElementById("rbTurno")).value;
-    return retorno;
-}
-
-function ObtenerSueldoMaximo(val:string):number{
-    let retorno:number = 0;
-    if(val== 'M'){
-        retorno = 20000;        
-    }else if(val == 'T'){
-        retorno = 18500;   
-    }else if(val == 'N'){
-        retorno = 24000; 
-    }    
-    return retorno;
-}

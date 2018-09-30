@@ -203,6 +203,10 @@ function AdministrarValidacionesLogin() {
         }
         if (camposVacios || camposFueraDeRango) {
             alert("Errores de carga");
+            return false;
+        }
+        else {
+            return true;
         }
     }
 }

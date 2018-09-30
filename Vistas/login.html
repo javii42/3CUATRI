@@ -7,8 +7,8 @@
     <script src="../tsc/Funciones.js"></script>
     <title>HTML5 - Fomulario Login</title>
 </head>
-<body>
-    <form id="frmLogin">
+<body>"
+    <form id="frmLogin" action="../Controladores/verificarUsuario.php" method="POST" onsubmit="return AdministrarValidacionesLogin()">
         <table align="center">
             <tr align = "left">
                 <th>                    
@@ -39,7 +39,7 @@
             <tr align="right">
                 <td></td>
                 <td>
-                    <input type="button" name="btnEnviar" id ="btnEnviar" value="Enviar" onclick="AdministrarValidacionesLogin()">
+                    <input type="submit" name="btnEnviar" id ="btnEnviar" value="Enviar">
                 </td>
             </tr>
             <tr align="right">

@@ -13,6 +13,22 @@
     </style>
 </head>
 <body>
+    <?php
+         
+        
+        if(file_exists("./Controladores/validarSesion.php")) require_once("./Controladores/validarSesion.php");
+        if(file_exists("../Controladores/validarSesion.php")) require_once("../Controladores/validarSesion.php");
+
+         if(!validarSesion()){    
+             if(file_exists("./login.html")) header('Location: ./login.html');
+             if(file_exists("./Vistas/login.html")) header('Location: ./Vistas/login.html');
+             if(file_exists("../Vistas/login.html")) header('Location: ../Vistas/login.html');
+         }else{
+         }
+    ?>
+    <div align = "right">
+        <a href = "../Controladores/cerrarSesion.php">Desloguearse</a>
+    </div>
     <div align = "center">
         <table>
             <tr>

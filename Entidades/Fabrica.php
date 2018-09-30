@@ -101,6 +101,7 @@ class Fabrica implements IArchivo{
                         $arrayLinea[4] . "-". $arrayLinea[5] . "-". $arrayLinea[6];*/
                         $empleado = new Empleado($arrayLinea[0],$arrayLinea[1],
                             $arrayLinea[2],$arrayLinea[3],$arrayLinea[4],$arrayLinea[5],$arrayLinea[6]);
+                        $empleado->SetPathFoto($arrayLinea[7]);
                         $this->AgregarEmpleado($empleado);
                     }
                 }

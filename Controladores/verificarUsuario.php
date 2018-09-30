@@ -8,6 +8,7 @@
 </head>
 <body>
    <?php
+        session_start();
         $existeEmpleado = false;
 
         if(isset($_POST["txtDni"])){
@@ -44,6 +45,7 @@
 
         }
         if($existeEmpleado){
+                $_SESSION["DNIEmpleado"] = $dni;
                 if(file_exists("../Vistas/mostrar.php")) header("location:../Vistas/mostrar.php");
                 if(file_exists("./Vistas/mostrar.php")) header("location:./Vistas/mostrar.php");
             }else{

@@ -1,12 +1,11 @@
-Maca-Mollar-1000058-m-102-10000-N
+Maca-Mollar-1000058-m-102-10000-N-../img/gatito.jpg
 
-Eli-Mollar-1000005-t-106-11000-N
+Eli-Mollar-1000005-t-106-11000-N-../img/gatito.jpg
 
-Javier-Mollar-3565435-h-181-8000-N
+Javier-Mollar-3565435-h-181-8000-N-../img/gatito.jpg
 
-Otero-Tatu-3498955-h-105-9500-N
+Otero-Tatu-3498955-h-105-9500-N-../img/gatito.jpg
 
-Rodriga-Somosa-1000019-m-149-14000-M
+Rodriga-Somosa-1000019-m-149-14000-M-../img/gatito.jpg
 
-Robertiño-Oporto-1000019-h-152-15000-T
-
+Hector-Mollar-1000010-h-110-13000-M-../img/IMG-20170526-WA0001.jpg

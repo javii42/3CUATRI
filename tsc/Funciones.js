@@ -84,14 +84,18 @@ function AdministrarValidaciones() {
             alert("Verificar errores de carga");
         }
         else {
+            var formData = new FormData(formulario);
+            formData.forEach(function (value, key) {
+                console.log("elemento: " + key + "-" + value);
+            });
             //FORM OK
             //METODO; URL; ASINCRONICO?
             xhttp.open("POST", "../Controladores/administracion.php", true);
             //SETEO EL ENCABEZADO DE LA PETICION	
-            xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+            // xhttp.setRequestHeader("content-type","application/form-data");
+            // xhttp.setRequestHeader("enctype", "multipart/form-data");
             //ENVIO DE LA PETICION CON LOS PARAMETROS
-            xhttp.send("nombre=" + nombre + "&apellido=" + apellido + "&dni=" + dni + "&sexo=" + sexo + "&legajo=" + legajo
-                + "&sueldo=" + sueldo + "&turno=" + turno);
+            xhttp.send(formData);
             //FUNCION CALLBACK
             var link_1 = document.getElementById("volver");
             xhttp.onreadystatechange = function () {

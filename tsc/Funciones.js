@@ -77,7 +77,7 @@ function AdministrarValidaciones() {
         console.log("input: " + combo.id + "-" + combo.value);
         if (!ValidarCombo(combo.value, "s")) {
             console.log("Combo de sexo no seleccionado");
-            AdministrarSpanError(camposIn[i].id, true);
+            AdministrarSpanError(combo.id, true);
             comboNoSeleccionado = true;
         }
         if (comboNoSeleccionado || camposVacios || camposFueraDeRango) {

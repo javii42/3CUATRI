@@ -138,7 +138,7 @@
                         <label>Turno</label>
                     </td>
                     <td>
-                        <input type="radio" name="rbTurnoM" id="rbTurno" value="M" checked> Mañana<br>
+                        <input type="radio" name="rbTurnoM" id="rbTurno" value="M"> Mañana<br>
                         <input type="radio" name="rbTurnoT" id="rbTurno"  value="T"> Tarde<br>
                         <input type="radio" name="rbTurnoN" id="rbTurno"  value="N"> Noche
                     </td>

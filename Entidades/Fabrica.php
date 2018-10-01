@@ -30,7 +30,10 @@ class Fabrica implements IArchivo{
         $this->_empleados = $this->EliminarEmpleadoRepetido();
         return $retorno;
     }
-
+    
+    public function GetEmpleados(){
+        return $this->_empleados;
+    }
     public function CalcularSueldos(){
         $sueldos = 0;
         foreach($this->_empleados as $empleado){

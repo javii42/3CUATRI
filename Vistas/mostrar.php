@@ -25,6 +25,10 @@
              if(file_exists("../Vistas/login.html")) header('Location: ../Vistas/login.html');
          }else{
          }
+
+         if(file_exists("./Entidades/Fabrica.php")) require_once("./Entidades/Fabrica.php");
+         if(file_exists("../Entidades/Fabrica.php")) require_once("../Entidades/Fabrica.php");
+ 
     ?>
     <div align = "right">
         <a href = "../Controladores/cerrarSesion.php">Desloguearse</a>
@@ -53,53 +57,53 @@
                 <th></th>
             </tr>
             <?php
-                $archivo = fopen("../archivos/empleados.txt","rb");
-                while(!feof($archivo)){
-                    $linea = fgets($archivo);
-                    $arrayLinea = explode("-",$linea);
-                    if(isset($arrayLinea[1])){
+                $fabrica = new Fabrica("fabrica");
+                $fabrica->TraerDeArchivo("empleados.txt");
+                $empleados = $fabrica->GetEmpleados();
+                foreach($empleados as $empleado){
                     ?>
-                        <tr> 
-                            <td colspan="1"> <?php echo $arrayLinea[0]; ?></td>
-                            <td> <?php echo $arrayLinea[1]; ?> </td>
-                            <td> <?php echo $arrayLinea[2]; ?> </td>
-                            <td> <?php switch(trim($arrayLinea[3])){
-                                    case "h":
-                                        echo "Hombre";
-                                        break;
-                                    case "m":
-                                        echo "Mujer";
-                                        break;
-                                    default:
-                                        echo "Indefinido";
-                                        break;
-                            }  ?> </td>
-                            <td> <?php echo $arrayLinea[4]; ?> </td>
-                            <td> <?php echo $arrayLinea[5]; ?> </td>
-                            <td> <?php switch(trim($arrayLinea[6])){
-                                    case "M":
-                                        echo "Mañana";
-                                        break;
-                                    case "T":
-                                        echo "Tarde";
-                                        break;
-                                    case "N":
-                                        echo "Noche";
-                                        break;
-                                    default:
-                                        echo "-";
-                                        break;
-                            } ?> </td>
-                            <td>
-                                <a href="../Controladores/eliminar.php?legajo=<?php echo $arrayLinea[4]; ?>">Eliminar...</a>
-                            </td>
-                        </tr>
-                    
-                    <?php
-                    }
+                    <tr> 
+                        <td colspan="1"> <?php echo $empleado->GetNombre(); ?></td>
+                        <td> <?php echo $empleado->GetApellido(); ?> </td>
+                        <td> <?php echo  $empleado->GetDni();?> </td>
+                        <td> <?php switch(trim( $empleado->GetSexo())){
+                                case "h":
+                                    echo "Hombre";
+                                    break;
+                                case "m":
+                                    echo "Mujer";
+                                    break;
+                                default:
+                                    echo "Indefinido";
+                                    break;
+                        }  ?> </td>
+                        <td> <?php echo  $empleado->GetLegajo(); ?> </td>
+                        <td> <?php echo  "$".$empleado->GetSueldo(); ?> </td>
+                        <td> <?php switch(trim( $empleado->GetTurno())){
+                                case "M":
+                                    echo "Mañana";
+                                    break;
+                                case "T":
+                                    echo "Tarde";
+                                    break;
+                                case "N":
+                                    echo "Noche";
+                                    break;
+                                default:
+                                    echo "-";
+                                    break;
+                        
+                        } ?> </td>
+                        <td>
+                            <img src=<?php echo $empleado->GetPathFoto();?> width="90px" height="90px" />
+                        </td>
+                        <td>
+                            <a href="../Controladores/eliminar.php?legajo=<?php echo $arrayLinea[4]; ?>">Eliminar...</a>
+                        </td>
+                    </tr>
+                
+                <?php
                 }
-                fclose($archivo);  
-            
             ?>
             <tr>
                 <th colspan="8">

@@ -94,7 +94,7 @@ function AdministrarValidaciones(){
           });
             //FORM OK
              //METODO; URL; ASINCRONICO?
-            xhttp.open("POST", "../Controladores/administracion.php", true);
+            xhttp.open("POST", "./Controladores/administracion.php", true);
 
             //SETEO EL ENCABEZADO DE LA PETICION	
            // xhttp.setRequestHeader("content-type","application/form-data");
@@ -108,16 +108,16 @@ function AdministrarValidaciones(){
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
                     if(xhttp.responseText != "error"){
                         alert(xhttp.responseText);
-                        link.setAttribute("href","../Vistas/mostrar.php");
+                        link.setAttribute("href","./Vistas/mostrar.php");
                         link.hidden = false;
                     }else{
-                        link.setAttribute("href","../index.php");
+                        link.setAttribute("href","./index.php");
                         alert("No se pudo cargar el empleado");
                         link.hidden = false;
                     }
                     
                 }else{  
-                    link.setAttribute("href","../index.php");
+                    link.setAttribute("href","./index.php");
                     link.hidden = false;
                 }
             }

@@ -47,6 +47,7 @@ class Fabrica implements IArchivo{
         for($i = 0; $i <= count($this->_empleados); $i++){
             if(is_a($this->_empleados[$i],'Empleado') && !is_null($this->_empleados[$i])){
                 if($emp->GetLegajo() == $this->_empleados[$i]->GetLegajo()){
+                    unlink(trim($this->_empleados[$i]->GetPathFoto()));
                     unset($this->_empleados[$i]);
                     $retorno = true;
                 }

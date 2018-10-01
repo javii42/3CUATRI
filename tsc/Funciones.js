@@ -90,7 +90,7 @@ function AdministrarValidaciones() {
             });
             //FORM OK
             //METODO; URL; ASINCRONICO?
-            xhttp.open("POST", "../Controladores/administracion.php", true);
+            xhttp.open("POST", "./Controladores/administracion.php", true);
             //SETEO EL ENCABEZADO DE LA PETICION	
             // xhttp.setRequestHeader("content-type","application/form-data");
             // xhttp.setRequestHeader("enctype", "multipart/form-data");
@@ -102,17 +102,17 @@ function AdministrarValidaciones() {
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
                     if (xhttp.responseText != "error") {
                         alert(xhttp.responseText);
-                        link_1.setAttribute("href", "../Vistas/mostrar.php");
+                        link_1.setAttribute("href", "./Vistas/mostrar.php");
                         link_1.hidden = false;
                     }
                     else {
-                        link_1.setAttribute("href", "../index.php");
+                        link_1.setAttribute("href", "./index.php");
                         alert("No se pudo cargar el empleado");
                         link_1.hidden = false;
                     }
                 }
                 else {
-                    link_1.setAttribute("href", "../index.php");
+                    link_1.setAttribute("href", "./index.php");
                     link_1.hidden = false;
                 }
             };
@@ -213,4 +213,10 @@ function AdministrarValidacionesLogin() {
             return true;
         }
     }
+}
+function AdministrarModificar(dni) {
+    var form = document.getElementById("frmModificar");
+    var input = document.getElementById("modificar");
+    input.value = dni.toString();
+    form.submit();
 }

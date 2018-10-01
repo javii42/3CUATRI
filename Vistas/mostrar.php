@@ -36,12 +36,12 @@
     <div align = "center">
         <table>
             <tr>
-                <th align="left" colspan="8">
+                <th align="left" colspan="10">
                     <h2> Lista de empleados EMPLEADOS </h2>
                 </th>
             </tr>
             <tr>
-                <th align="left" colspan="8">
+                <th align="left" colspan="10">
                     <h4>Info</h4>
                     <hr/>
                 </th>
@@ -98,7 +98,10 @@
                             <img src=<?php echo $empleado->GetPathFoto();?> width="90px" height="90px" />
                         </td>
                         <td>
-                            <a href="../Controladores/eliminar.php?legajo=<?php echo $arrayLinea[4]; ?>">Eliminar...</a>
+                            <a href="../Controladores/eliminar.php?legajo=<?php echo  $empleado->GetLegajo(); ?>">Eliminar...</a>
+                        </td>
+                        <td>
+                            <input type="button" value="Modificar" onclick="AdministrarModificar(<?php echo  $empleado->GetDni(); ?>)">
                         </td>
                     </tr>
                 
@@ -106,12 +109,17 @@
                 }
             ?>
             <tr>
-                <th colspan="8">
+                <th colspan="10">
                     <hr/>
                 </th>
             </tr>
         </table>
     </div>
 <a href="../index.php">Volver</a>
+
+<form id="frmModificar" action="../index.php" method="POST">
+    <input type="hidden" name="modificar" id="modificar">
+</form>
+
 </body>
 </html>

@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="../tsc/Funciones.js"></script>
-    <title>Formulario Alta Empleado</title>
-</head>
-<body>
-        <div align = "right">
+<div align = "right">
                 <a href = "../Controladores/cerrarSesion.php">Desloguearse</a>
             </div>
     <form id="frmAlta" enctype="multipart/form-data">
     <table align ="center">
             <tr align ="left">
-                    <h2>Alta Empleado</h2>
+                    <h2><?php echo $nombrePagina; ?></h2>
              </tr>
             <tr>
             <th colspan="2" align = "left">
@@ -114,11 +104,10 @@
             <tr align = "right">
                 <td></td>
             <td>
-                <input type="button" value="Enviar" onclick="AdministrarValidaciones()">
+                <input type="button" value=<?php echo $botonTxt; ?> onclick="AdministrarValidaciones()">
                 </td>
             </tr>
     </table>
 </form>
 <a id="volver" hidden>Volver</a>
-</body>
 </html>

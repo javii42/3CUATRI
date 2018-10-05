@@ -82,7 +82,7 @@ class Fabrica implements IArchivo{
             $archivo = fopen("../Archivos/".$nombreDeArchivo,"a+");
         }
         foreach($this->_empleados as $empleado){
-           if(is_a($empleado,'Empleado'))  $escribio = fwrite($archivo,$empleado->ToString()."\r\n");
+           if(is_a($empleado,'Empleado'))  $escribio = fwrite($archivo,trim($empleado->ToString())."\n");
         }       
         fclose($archivo); 
     }
@@ -97,7 +97,7 @@ class Fabrica implements IArchivo{
            // echo "../Archivos/".$nombreDeArchivo;
             if($archivo != null){
                 while(!feof($archivo) && $archivo != null){
-                    $linea = fgets($archivo);
+                    $linea = trim(fgets($archivo));
                     $arrayLinea = explode("-",$linea);
                     if(isset($arrayLinea[1])){
                      /*   echo $arrayLinea[0] . "-". $arrayLinea[1] . "-". 

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="../tsc/funciones.js"></script>
+    <link rel="stylesheet" type="text/css" href="../estilos/sheet.css">
     <title>HTML5 - Lista Empleados</title>
     <style>
         td{
@@ -37,7 +38,7 @@
         <table>
             <tr>
                 <th align="left" colspan="10">
-                    <h2> Lista de empleados EMPLEADOS </h2>
+                    <h2> Lista de EMPLEADOS </h2>
                 </th>
             </tr>
             <tr>
@@ -63,10 +64,10 @@
                 foreach($empleados as $empleado){
                     ?>
                     <tr> 
-                        <td colspan="1"> <?php echo $empleado->GetNombre(); ?></td>
-                        <td> <?php echo $empleado->GetApellido(); ?> </td>
-                        <td> <?php echo  $empleado->GetDni();?> </td>
-                        <td> <?php switch(trim( $empleado->GetSexo())){
+                        <td class="mostrar" colspan="1"> <?php echo $empleado->GetNombre(); ?></td>
+                        <td class="mostrar" > <?php echo $empleado->GetApellido(); ?> </td>
+                        <td class="mostrar" > <?php echo  $empleado->GetDni();?> </td>
+                        <td class="mostrar" > <?php switch(trim( $empleado->GetSexo())){
                                 case "h":
                                     echo "Hombre";
                                     break;
@@ -77,9 +78,9 @@
                                     echo "Indefinido";
                                     break;
                         }  ?> </td>
-                        <td> <?php echo  $empleado->GetLegajo(); ?> </td>
-                        <td> <?php echo  "$".$empleado->GetSueldo(); ?> </td>
-                        <td> <?php switch(trim( $empleado->GetTurno())){
+                        <td class="mostrar" > <?php echo  $empleado->GetLegajo(); ?> </td>
+                        <td class="mostrar" > <?php echo  "$".$empleado->GetSueldo(); ?> </td>
+                        <td class="mostrar" > <?php switch(trim( $empleado->GetTurno())){
                                 case "M":
                                     echo "Mañana";
                                     break;
@@ -94,11 +95,11 @@
                                     break;
                         
                         } ?> </td>
-                        <td>
+                        <td class="mostrar" >
                             <img src=<?php echo $empleado->GetPathFoto();?> width="90px" height="90px" />
                         </td>
-                        <td>
-                            <a href="../Controladores/eliminar.php?legajo=<?php echo  $empleado->GetLegajo(); ?>">Eliminar...</a>
+                        <td class="mostrar" >
+                            <a class="button" href="../Controladores/eliminar.php?legajo=<?php echo  $empleado->GetLegajo(); ?>">Eliminar...</a>
                         </td>
                         <td>
                             <input type="button" value="Modificar" onclick="AdministrarModificar(<?php echo  $empleado->GetDni(); ?>)">
@@ -108,11 +109,6 @@
                 <?php
                 }
             ?>
-            <tr>
-                <th colspan="10">
-                    <hr/>
-                </th>
-            </tr>
         </table>
     </div>
 <a href="../index.php">Volver</a>
